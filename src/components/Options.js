@@ -80,10 +80,10 @@ const Options = ({
   }, [filterByText, removeValues]);
 
   const renderGroupItem = (item, index) => (
-    <>
+    <div className="px-4">
       <GroupItem primaryColor={primaryColor} item={item} />
       {index + 1 < filterResult.length && <hr className="my-1" />}
-    </>
+    </div>
   );
 
   const renderItem = (item) => <Item primaryColor={primaryColor} item={item} />;
