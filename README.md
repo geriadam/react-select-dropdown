@@ -1,70 +1,162 @@
-# Getting Started with Create React App
+# React Select Dropdown
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Features
 
-## Available Scripts
+- Single or Multiple Selection
+- Searchable Dropdown
+- Customization option rendering
+- Portal Support
+- Optional deactivation of an option
+- Select Theme Color
+- Group options
 
-In the project directory, you can run:
+## Demo
 
-### `npm start`
+Demo [here](https://react-select-dropdown-gamma.vercel.app/)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Install
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```bash
+git clone https://github.com/geriadam/react-select-dropdown.git
+cd react-select-dropdow
+```
 
-### `npm test`
+## Theming options
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Theme color from [Tailwind Colors](https://tailwindcss.com/docs/colors)
 
-### `npm run build`
+To change the default theme, simply add the `primaryColor` props to your select field with the theme value. By default, the `primaryColor` is set to `teal`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Props
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+This table shows all the options available in react-tailwindcss-select.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+| Option                                        | Type       | Default            | Description                                                                            |
+|-----------------------------------------------|------------|--------------------|----------------------------------------------------------------------------------------|
+| [`classNames`](#classNames)                   | `Object`   | `undefined`        | This prop allows you to style most of the components used.             |
+| `isDisabled`                                  | `Boolean`  | `false`            | Indicates if you can disable the select field.                                         |
+| `isMultiple`                                  | `Boolean`  | `false`            | Indicates if you can do a multiple selection.                                          |
+| `isSearchable`                                | `Boolean`  | `false`            | Indicates if you can search the elements of the select field.                          |
+| [`formatGroupLabel`](#formatGroupLabel)       | `Function` | `null`             | Allows you to use a custom rendering template for each subgroup title                  |
+| [`formatOptionLabel`](#formatOptionLabel)     | `Function` | `null`             | Allows you to use a custom rendering template for each option in the list              |
+| `loading`                                     | `Boolean`  | `false`            | Indicates if you want a loader to appear in the field.                                 |
+| `menuIsOpen`                                  | `Boolean`  | `false`            | Indicates if you want the options menu to be displayed by default.                     |
+| `noOptionsMessage`                            | `String`   | `No results found` | Default message when there is no option in the select field.                           |
+| [`onChange`](#onChange)                       | `Function` |                    | This callback, if present, is triggered when the select field value is modified.       |
+| [`onSearchInputChange`](#onSearchInputChange) | `Function` |                    | This callback, if present, is triggered when the search input field value is modified. |
+| [`options`](#options)                         | `Array`    | `[]`               | All options or options groups available in the selection field.                        |
+| `placeholder`                                 | `String`   | `Select...`        | The placeholder shown for the select field.                                            |
+| `primaryColor`                                | `String`   | `teal`             | Default theme of the field.                                                            |
+| `searchInputPlaceholder`                      | `String`   | `Search...`        | The placeholder shown for the search input field.                                      |
+| [`value`](#value)                             | `Object`   | `null`             | Current value of select field.                                                         |
 
-### `npm run eject`
+### onChange
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+This callback, if present, is triggered when the select field value is modified. This callback takes
+as a parameter the current value(s) selected. These values respect the same structure as the
+elements of the options.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```js
+currentValue => {
+    console.log("currentValue:", currentValue);
+};
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### onSearchInputChange
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+This callback, if present, is triggered when the search input field value is modified. This callback takes
+as parameter a `React.ChangeEvent<HTMLInputElement>`.
 
-## Learn More
+```js
+e => {
+    console.log("value:", e.target.value);
+};
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### options
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+All options are available in the select field. Each option element must have a `value` property that
+serves as an identifier for the element, a `label` property that is the text that is displayed in
+the options list, and an optional `disabled` property to specify whether the element is active.
 
-### Code Splitting
+```js
+// default element
+const options = [{ value: "option-1", label: "Option 1" }];
+// default element with `disabled`
+const options = [{ value: "option-1", label: "Option 1", disabled: true }];
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+#### Group item
 
-### Analyzing the Bundle Size
+If you want to group options you can use the following code.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```js
+const options = [
+    {
+        label: "Title 1",
+        options: [
+            { value: "option-1", label: "Option 1" },
+            { value: "option-2", label: "Option 2" }
+        ]
+    },
+    {
+        label: "Title 2",
+        options: [
+            { value: "option-3", label: "Option 3" },
+            { value: "option-4", label: "Option 4" }
+        ]
+    },
+];
+```
 
-### Making a Progressive Web App
+### value
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+The current value of the select field. These objects must follow the same structure as an `options`
+element. Thus, the following would work:
 
-### Advanced Configuration
+```js
+// default element Simple Select
+const value = { value: "option-1", label: "Option 1" };
+// default element with `disabled` Simple Select
+const value = { value: "option-1", label: "Option 1", disabled: true };
+// default element Multiple Select
+const value = [{ value: "option-1", label: "Option 1" }];
+// default element with `disabled` Multiple Select
+const value = [{ value: "option-1", label: "Option 1", disabled: true }];
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### formatGroupLabel
 
-### Deployment
+`formatGroupLabel` allows you to use a custom rendering template for each subgroup title.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### formatOptionLabel
 
-### `npm run build` fails to minify
+`formatOptionLabel` allows you to use a custom rendering template for each option in the list.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### classNames
+
+Each key takes a callback function or a string. If a key is not filled in, the default classes of the component will be used.
+
+#### All keys
+
+```javascript
+  classNames?: {
+      menu?: string;
+      tagItem?: (value?: { item?: Option, isDisabled?: boolean }) => string;
+      tagItemText?: string;
+      tagItemIconContainer?: string;
+      tagItemIcon?: string;
+      list?: string;
+      listGroupLabel?: string;
+      listItem?: (value?: { isSelected?: boolean }) => string;
+      listDisabledItem?: string;
+      searchContainer?: string;
+      searchBox?: string;
+      searchIcon?: string;
+      deleteIcon?: string;
+  };
+```
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](https://choosealicense.com/licenses/mit/) for more details.
