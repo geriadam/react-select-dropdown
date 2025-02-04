@@ -79,7 +79,7 @@ const Select = ({
           setOpen(false);
           onChange(selected);
         } else {
-          onChange(value === null ? [selected] : [...value, selected]);
+          onChange(value === null || !Array.isArray(value) ? [selected] : [...value, selected]);
         }
       }
     },
@@ -134,7 +134,7 @@ const Select = ({
                 </p>
               ) : (
                 <>
-                  {(!value || value.length === 0) && <p className="truncate cursor-default select-none">{placeholder}</p>}
+                  {value == null && <p className="truncate cursor-default select-none">{placeholder}</p>}
                   {Array.isArray(value) &&
                     value.map((item, index) => (
                       <div key={index} className={getTagItemClass(item)}>
