@@ -1,5 +1,8 @@
 # React Select Dropdown
 
+![{BAE8F95F-FACC-44A6-9213-AE01D0FCD93A}](https://github.com/user-attachments/assets/5d803cde-00c7-442d-ad06-e5144cf4b583)
+
+
 ## Features
 
 - Single or Multiple Selection
@@ -12,13 +15,45 @@
 
 ## Demo
 
-Demo [here](https://react-select-dropdown-gamma.vercel.app/)
+Website [here](https://site-react-select-dropdown-tailwind.vercel.app/)
+Storybook [here](https://react-select-dropdown-tailwind.vercel.app/)
 
 ## Install
 
 ```bash
-git clone https://github.com/geriadam/react-select-dropdown.git
-cd react-select-dropdow
+npm i react-select-dropdown-tailwind
+```
+
+## Usage
+
+```javascript
+import Select from "react-select-dropdown-tailwind";
+import { useState } from "react";
+
+const data = [
+  { label: "Option 1", value: "Option 1" },
+  { label: "Option 2", value: "Option 2" },
+];
+
+const App = () => {
+  const [selectValues, setSelectValues] = useState(null);
+
+  const handleChange = value => {
+    console.log("value:", value);
+    setSelectValues(value);
+  };
+
+  return (
+    <Select
+      options={data}
+      value={selectValues}
+      onChange={handleChange}
+      placeholder="Select option"
+    />
+  );
+};
+
+export default App;
 ```
 
 ## Theming options
@@ -78,6 +113,8 @@ e => {
 All options are available in the select field. Each option element must have a `value` property that
 serves as an identifier for the element, a `label` property that is the text that is displayed in
 the options list, and an optional `disabled` property to specify whether the element is active.
+
+#### item
 
 ```js
 // default element
