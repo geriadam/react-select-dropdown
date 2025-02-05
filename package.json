@@ -1,5 +1,5 @@
 {
-  "name": "react-select-dropdown",
+  "name": "react-select-dropdown-tailwind",
   "version": "0.1.0",
   "description": "A custom React Select dropdown component.",
   "main": "dist/index.js",

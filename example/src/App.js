@@ -1,4 +1,4 @@
-import Select from "react-select-dropdown";
+import Select from "react-select-dropdown-tailwind";
 import { useCallback, useEffect, useState } from "react";
 
 const data = [
@@ -11,7 +11,6 @@ const data = [
 ];
 
 const App = () => {
-  console.log("as")
   const [selectValues, setSelectValues] = useState({
     firstSelect: null,
     secondSelect: null,
@@ -34,7 +33,6 @@ const App = () => {
       setOptions(data);
       setLoading(false);
     }, 1000);
-
     return () => clearTimeout(timer);
   }, []);
 
@@ -50,40 +48,53 @@ const App = () => {
   };
 
   return (
-    <div className="p-4 space-y-4">
-      {/* First Select */}
-      <Select
-        {...selectConfig}
-        options={filterOptions(options)}
-        value={selectValues.firstSelect}
-        onChange={(value) => handleSelectChange("firstSelect", value)}
-        loading={loading}
-        isMultiple={false}
-        isSearchable={false}
-        placeholder="Select first option"
-      />
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
+      <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-lg">
+        <h2 className="text-2xl font-semibold text-gray-700 mb-4 text-center">
+          Select Dropdown Tailwind
+        </h2>
+        <div className="space-y-4">
+          <div>
+            <Select
+              {...selectConfig}
+              label="Single Select"
+              options={filterOptions(options)}
+              value={selectValues.firstSelect}
+              onChange={(value) => handleSelectChange("firstSelect", value)}
+              loading={loading}
+              isMultiple={false}
+              isSearchable={false}
+              placeholder="Select first option"
+            />
+          </div>
 
-      {/* Second Select */}
-      <Select
-        {...selectConfig}
-        options={filterOptions(options)}
-        value={selectValues.secondSelect}
-        onChange={(value) => handleSelectChange("secondSelect", value)}
-        loading={loading}
-        isSearchable={false}
-        placeholder="Select second option"
-      />
+          <div>
+            <Select
+              {...selectConfig}
+              label="Multiple Select"
+              options={filterOptions(options)}
+              value={selectValues.secondSelect}
+              onChange={(value) => handleSelectChange("secondSelect", value)}
+              loading={loading}
+              isSearchable={false}
+              placeholder="Select second option"
+            />
+          </div>
 
-      {/* Third Select */}
-      <Select
-        {...selectConfig}
-        options={filterOptions(options)}
-        value={selectValues.thirdSelect}
-        onChange={(value) => handleSelectChange("thirdSelect", value)}
-        loading={loading}
-        outlined={true}
-        placeholder="Select third option"
-      />
+          <div>
+            <Select
+              {...selectConfig}
+              label="Multiple with search"
+              options={filterOptions(options)}
+              value={selectValues.thirdSelect}
+              onChange={(value) => handleSelectChange("thirdSelect", value)}
+              loading={loading}
+              outlined={true}
+              placeholder="Select third option"
+            />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
