@@ -1,4 +1,4 @@
-import Select from "./components/Select";
+import Select from "react-select-dropdown";
 import { useCallback, useEffect, useState } from "react";
 
 const data = [
@@ -11,6 +11,7 @@ const data = [
 ];
 
 const App = () => {
+  console.log("as")
   const [selectValues, setSelectValues] = useState({
     firstSelect: null,
     secondSelect: null,
